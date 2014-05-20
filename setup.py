@@ -27,7 +27,7 @@ setup(
         'django-chained-selectbox',
     ],
     dependency_links=[
-        'https://github.com/evildmp/django-widgetry/archive/improve-link-schema.zip#egg=django-widgetry-evildmp',
-        'https://github.com/evildmp/django-chained-selectbox/archive/fk-compatibility.zip#egg=django_chained_selectbox-evildmp',
+        'https://github.com/evildmp/django-widgetry/archive/improve-link-schema.zip#egg=django-widgetry',
+        'https://github.com/evildmp/django-chained-selectbox/archive/fk-compatibility.zip#egg=django-chained-selectbox',
     ],
 )
