@@ -23,7 +23,5 @@ setup(
         'django-pagination',
         'django-easyfilters',
         'django-treeadmin',
-        'django-widgetry',
-        'django-chained-selectbox',
     ],
 )
