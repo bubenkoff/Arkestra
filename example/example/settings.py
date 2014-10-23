@@ -196,6 +196,7 @@ INSTALLED_APPS = (
     'south',
     'treeadmin',
     'pagination',
+    'chained_selectbox',
 
     # core Django applications
     # these should be last, so we can override their templates
