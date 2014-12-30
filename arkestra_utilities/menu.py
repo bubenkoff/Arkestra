@@ -1,3 +1,4 @@
+print "hi"
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from django.core.cache import cache
@@ -10,7 +11,8 @@ from menus.menu_pool import menu_pool
 from menus.base import Modifier
 
 from arkestra_utilities.settings import ARKESTRA_MENUS
-
+# from arkestra.contacts_and_people.models import Entity
+# print "ok"
 
 try:
     # django CMS < 2.4
@@ -71,27 +73,52 @@ class ArkestraPages(Modifier):
         self.request = request
 
         if menus and not post_cut:
+
+            entity_home_pages = Page.objects.select_related(
+                "publisher_public"
+                ).filter(entity__isnull=False)
+
+            published_entity_home_pages = [page.publisher_public.id for page in entity_home_pages]
+
+
+
             key = "ArkestraPages.modify()" + request.path + "pre_cut"
             cached_pre_cut_nodes = cache.get(key, None)
             if cached_pre_cut_nodes:
                 return cached_pre_cut_nodes
 
+
             # loop over all the nodes returned by the nodes in the Menu classes
-            for node in self.nodes:
+            for node in [node for node in self.nodes if node.id in published_entity_home_pages]:
                 # for each node, try to find a matching Page that is an
                 # Entity's home page
-                try:
-                    page = Page.objects.get(id=node.id, entity__isnull=False)
-                except Page.DoesNotExist:
-                    node.entity = False
-                else:
-                    node.entity = page.entity.all()[0]
-                    for menu_class in menus:
-                        if type(menu_class) is dict:
-                            self.do_old_menu(node, menu_class, node.entity)
+                print node.id
 
-                        else:
-                            self.do_menu(node, menu_class, node.entity)
+                node.entity = page.entity.all()[0]
+                for menu_class in menus:
+                    if type(menu_class) is dict:
+                        self.do_old_menu(node, menu_class, node.entity)
+
+                    else:
+                        self.do_menu(node, menu_class, node.entity)
+
+
+
+                # if node.id in published_entity_home_pages:
+                #     print node.id, "yes"
+                #
+                # try:
+                #     page = Page.objects.get(id=node.id, entity__isnull=False)
+                # except Page.DoesNotExist:
+                #     node.entity = False
+                # else:
+                #     node.entity = page.entity.all()[0]
+                #     for menu_class in menus:
+                #         if type(menu_class) is dict:
+                #             self.do_old_menu(node, menu_class, node.entity)
+                #
+                #         else:
+                #             self.do_menu(node, menu_class, node.entity)
 
 
 
