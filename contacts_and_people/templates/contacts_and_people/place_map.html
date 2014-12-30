@@ -1,10 +1,13 @@
 {% extends "contacts_and_people/place.html" %}{% load thumbnail placeholder_tags %}
 
+{% block title %}
+	<title>{{ place }} - map</title>
+{% endblock %}
+
 {% block extrastyles %}
 {{ block.super }}
 <link href="{{ STATIC_URL }}arkestra/css/arkestra_maps.css" rel="stylesheet" type="text/css" />
 {% endblock extrastyles %}
-
 
 {% block scripts %}
 {{ block.super }}
@@ -97,12 +100,13 @@
 {% block skip_and_language %}
 {% endblock %}
 
-
 {% block nav_local %}
 {% endblock nav_local %}
 
 {% block pagetitle %}
-	<h{{PAGE_TITLE_HEADING_LEVEL}} class="name">{{ place }}</h{{PAGE_TITLE_HEADING_LEVEL}}>
+	<div id="pagetitle">
+        <h{{PAGE_TITLE_HEADING_LEVEL}} class="name">{{ place }}</h{{PAGE_TITLE_HEADING_LEVEL}}>
+    </div>
 {% endblock pagetitle %}
 
 {% block place_information %}

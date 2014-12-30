@@ -8,11 +8,13 @@
 {% block nav_local %}{% endblock nav_local %}
 
 {% block pagetitle %}
-	<h{{PAGE_TITLE_HEADING_LEVEL}}>{{ item.title }}</h{{PAGE_TITLE_HEADING_LEVEL}}>
+    <div id="pagetitle">
+    	<h{{PAGE_TITLE_HEADING_LEVEL}}>{{ item.title }}</h{{PAGE_TITLE_HEADING_LEVEL}}>
+    </div>
 {% endblock pagetitle %}
 
 {% block summary %}
-	<p class="subtitle">{{ item.summary }}</p>
+	<p class="subtitle">{{ item.summary|amp|smartypants|caps|initial_quotes }}</p>
 {% endblock summary %}
 
 

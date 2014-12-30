@@ -135,7 +135,6 @@ class Link(BaseLink, LinkMethodsMixin):
     ObjectLinks and links.GenericLinkListPluginItem
     """
 
-
     FORMATS = (
         ("title", u"Title only"),
         ("details image", u"Details"),
@@ -369,7 +368,7 @@ class GenericLinkListPlugin(CMSPlugin):
         )
     insert_as = models.PositiveSmallIntegerField(
         choices=INSERTION_MODES,
-        default=1
+        default=0
         )
     use_link_icons = models.BooleanField(
         help_text="Place an icon on each link below (links in lists only)"
